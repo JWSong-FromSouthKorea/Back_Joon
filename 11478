@@ -1,0 +1,27 @@
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+	// write your code here
+        Scanner sc = new Scanner(System.in);
+        ArrayList<String> arr = new ArrayList<String>(Arrays.asList(sc.next().split("")));
+        HashMap<String, String> map = new HashMap<String, String>();
+        getStringNum(arr, arr.size(), map);
+        System.out.println(map.size());
+    }
+
+    private static void getStringNum(ArrayList<String> arr, int loopCount, HashMap answerMap) {
+        String arrToString = String.join("", arr);
+        if(!arrToString.isEmpty()) {
+            for (int i = 0; i <= arr.size(); i++) {
+                if(arrToString.substring(0, i).isEmpty()) continue;
+                answerMap.put(arrToString.substring(0, i), String.valueOf(i));
+            }
+        }
+
+        if(loopCount > 0) {
+            getStringNum(new ArrayList<String>(Arrays.asList(arrToString.substring(1).split(""))), loopCount-1, answerMap);
+        }
+    }
+}
